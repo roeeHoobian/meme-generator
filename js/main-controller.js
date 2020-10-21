@@ -11,6 +11,22 @@ function renderCanvas() {
     onRenderTxt();
 }
 
+
+function onDecreaseTxt() {
+    decrearseTxt();
+    renderCanvas();
+}
+
+function onIncreaseTxt() {
+    // clearTxt();
+    increaseTxt();
+    renderCanvas();
+
+}
+
+
+
+
 function onRenderTxt() {
     var txt = getTxt();
     drawText(txt);

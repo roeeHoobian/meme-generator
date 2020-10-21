@@ -16,7 +16,7 @@ var gMeme = {
             id: 1,
             txt: 'hello canvas',
             fontFamily: 'Impact',
-            fontSize: '48',
+            fontSize: 48,
             align: 'center',
             xPos: 50,
             yPos: 50,
@@ -28,6 +28,34 @@ var gMeme = {
 
 }
 
+function clearTxt() {
+    gCtx.clearRect(gMeme.lines[gMeme.SelectedLineIdx].xPos, gMeme.lines[gMeme.SelectedLineIdx].yPos, 400, 70);
+}
+
+function drawText(text) {
+    var size = gMeme.lines[gMeme.SelectedLineIdx].fontSize;
+    var strokeColor = 'black';
+    var fillColor = 'white';
+    gCtx.lineWidth = '1';
+    gCtx.font = `${size}px Impact`;
+    gCtx.textAlign = 'start';
+    gCtx.strokeStyle = strokeColor;
+    gCtx.fillStyle = fillColor;
+    gCtx.fillText(text, 50, 70);
+    gCtx.strokeText(text, 50, 70);
+
+}
+
+
+function decrearseTxt() {
+    gMeme.lines[gMeme.SelectedLineIdx].fontSize -= 6;
+}
+
+
+function increaseTxt() {
+    gMeme.lines[gMeme.SelectedLineIdx].fontSize += 6;
+}
+
 function getTxt() {
     return gMeme.lines[gMeme.SelectedLineIdx].txt;
 }
@@ -37,18 +65,6 @@ function setTxt(txt) {
 }
 
 
-function drawText(text) {
-    var strokeColor = 'black';
-    var fillColor = 'white';
-    gCtx.lineWidth = '1';
-    gCtx.font = '68px Impact';
-    gCtx.textAlign = 'start';
-    gCtx.strokeStyle = strokeColor;
-    gCtx.fillStyle = fillColor;
-    gCtx.fillText(text, 50, 70);
-    gCtx.strokeText(text, 50, 70);
-
-}
 
 function getImgId() {
     return gMeme.selectedImgId;
