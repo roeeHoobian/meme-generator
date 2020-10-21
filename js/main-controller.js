@@ -43,6 +43,8 @@ function onDeleteLine() {
     deleteLine();
     renderTxt();
     renderCanvas();
+    drawRect();
+
 }
 
 function onAddLine() {

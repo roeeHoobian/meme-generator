@@ -97,12 +97,16 @@ function getCurrLineIdx() {
 }
 
 
-// function setSelectedTxt(txtId) {
-//     gMeme.selectedLineIdx = txtId;
-// }
-
 function deleteLine() {
+    var prevSelectedLine = gMeme.selectedLineIdx;
     gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+    if (prevSelectedLine === gMeme.lines.length - 1) {
+        gMeme.selectedLineIdx = 0;
+    } else if (prevSelectedLine === 0) {
+        gMeme.selectedLineIdx = gMeme.lines.length - 1;
+    } else {
+        gMeme.selectedLineIdx = prevSelectedLine - 1;
+    }
 }
 
 function moveTxtUp() {
