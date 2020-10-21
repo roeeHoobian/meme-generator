@@ -22,18 +22,8 @@ var gMeme = {
             yPos: 20,
             width: 400,
             height: 50,
-        },
-        {
-            id: 2,
-            txt: '',
-            fontFamily: 'Impact',
-            fontSize: 48,
-            align: 'center',
-            xPos: 250,
-            yPos: 430,
-            width: 400,
-            height: 50,
         }
+
 
     ],
 
@@ -46,6 +36,7 @@ function getXPos() {
 }
 
 function drawRect() {
+    if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     gCtx.beginPath();
     gCtx.lineWidth = '2';
     gCtx.rect(0, gMeme.lines[gMeme.selectedLineIdx].yPos, 500, gMeme.lines[gMeme.selectedLineIdx].fontSize);
@@ -82,6 +73,21 @@ function switchToLine(nextIdx) {
 }
 
 
+function addNewLine(x, y) {
+    var line = {
+        id: 2,
+        txt: '',
+        fontFamily: 'Impact',
+        fontSize: 48,
+        align: 'center',
+        xPos: x,
+        yPos: y,
+        width: 400,
+        height: 50,
+    }
+    gMeme.lines.push(line);
+}
+
 function getLines() {
     return gMeme.lines;
 }
@@ -95,6 +101,9 @@ function getCurrLineIdx() {
 //     gMeme.selectedLineIdx = txtId;
 // }
 
+function deleteLine() {
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+}
 
 function moveTxtUp() {
     gMeme.lines[gMeme.selectedLineIdx].yPos -= 10;
@@ -117,10 +126,13 @@ function increaseTxt() {
 }
 
 function getTxt() {
-    return gMeme.lines[gMeme.selectedLineIdx].txt;
+    if (!gMeme.lines[gMeme.selectedLineIdx]) return;
+    var txt = gMeme.lines[gMeme.selectedLineIdx].txt;
+    return txt;
 }
 
 function setTxt(txt) {
+    if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 

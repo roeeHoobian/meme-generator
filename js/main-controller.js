@@ -1,4 +1,5 @@
 'use strict';
+var gYPos = 100;
 
 function onInit() {
     var elCanvas = document.querySelector('#myCanvas');
@@ -17,22 +18,46 @@ function onSwitchLine() {
     if (!lines) return;
     document.querySelector('.meme-title').focus();
     var currLineIdx = getCurrLineIdx();
-    console.log('currLineIdx', currLineIdx);
     if (currLineIdx === lines.length - 1) {
         switchToLine(0);
+        document.querySelector('.meme-title').value = getTxt();
         renderCanvas();
         drawRect();
         return;
     }
     switchToLine(++currLineIdx);
+    document.querySelector('.meme-title').value = getTxt();
     renderCanvas();
     drawRect();
 }
+
+
+
+
 
 function onChooseItem() {
     console.log(gMeme.selectedLineIdx);
 }
 
+function onDeleteLine() {
+    deleteLine();
+    renderTxt();
+    renderCanvas();
+}
+
+function onAddLine() {
+    var lines = getLines();
+    if (lines.length === 0) {
+        addNewLine(250, 20);
+    } else if (lines.length === 1) {
+        addNewLine(250, 430);
+        gYPos = 100;
+    } else {
+        addNewLine(250, gYPos);
+        gYPos += 50;
+    }
+    onSwitchLine();
+}
 
 function onAlignLeft() {
     alignTxtLeft();
@@ -90,7 +115,7 @@ function onChooseImg(imgId) {
     // resizeCanvas();
     setImg(imgId);
     document.querySelector('.meme-editor').classList.add('show');
-    renderCanvas()
+    renderCanvas();
 }
 
 function onRenderImg() {
