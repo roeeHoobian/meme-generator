@@ -1,10 +1,10 @@
 'use strict';
 
 function onInit() {
-    resizeCanvas();
     var elCanvas = document.querySelector('#myCanvas');
     setCanvas(elCanvas);
     renderImageGallery();
+    // resizeCanvas();
 }
 
 function renderCanvas() {
@@ -65,7 +65,9 @@ function onChooseTxt(elTxt) {
 }
 
 function onChooseImg(imgId) {
+    // resizeCanvas();
     setImg(imgId);
+    document.querySelector('.meme-editor').classList.add('show');
     renderCanvas()
 }
 
@@ -83,4 +85,12 @@ function renderImageGallery() {
         strHtml += `<img src=${img.url} class="img-${img.id}" onclick="onChooseImg(${img.id})">`
     });
     elGallery.innerHTML = strHtml;
+}
+
+
+function onDownloadCanvas(elLink) {
+    var canvas = getCanvas();
+    const data = canvas.toDataURL();
+    elLink.href = data;
+    elLink.download = 'my-meme.jpg';
 }

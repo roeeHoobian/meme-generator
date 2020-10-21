@@ -28,17 +28,43 @@
             <canvas id="myCanvas" width="500" height="500"></canvas>
         </div>
 
-        <div class="box-control">
-            <label for="meme-title">Meme Title:</label>
-            <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)" data-id="0" onfocus="onChooseTxt(this)">
-            <label for="meme-title">Meme Title-2:</label>
-            <input type="text" id="meme-title-2" class="meme-title-2" oninput="onChangeTxt(value)" data-id="1" onfocus="onChooseTxt(this)">
+        <div class="box-control flex column">
 
-            <button onclick="onIncreaseTxt()">Increase</button>
-            <button onclick="onDecreaseTxt()">Decrease</button>
-            <button onclick="onMoveTxtUp()">Move Up</button>
-            <button onclick="onMoveTxtDown()">Move Down</button>
-            <button onclick="onSwitchLine()">Switch Line</button>
+            <div class="txt-section flex column">
+
+                <label for="meme-title">Meme Title:</label>
+                <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)" data-id="0" onfocus="onChooseTxt(this)">
+                <label for="meme-title">Meme Title-2:</label>
+                <input type="text" id="meme-title-2" class="meme-title-2" oninput="onChangeTxt(value)" data-id="1" onfocus="onChooseTxt(this)">
+
+            </div>
+
+            <div class="move-section flex">
+
+                <button onclick="onMoveTxtUp()">Move Up</button>
+                <button onclick="onMoveTxtDown()">Move Down</button>
+                <button onclick="onSwitchLine()">Switch Line</button>
+
+            </div>
+
+            <div class="edit-section flex">
+
+                <button onclick="onIncreaseTxt()">Increase</button>
+                <button onclick="onDecreaseTxt()">Decrease</button>
+                <button>Align left</button>
+                <button>Align center</button>
+                <button>Align Right</button>
+            </div>
+
+            <div class="stickers-section flex"></div>
+
+            <div class="save-section flex">
+                <button>Share</button>
+                <button><a href="#" onclick="onDownloadCanvas(this)" download=""> Save</a>
+                   </button>
+            </div>
+
+
         </div>
 
     </div>

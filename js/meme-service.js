@@ -14,23 +14,23 @@ var gMeme = {
     SelectedLineIdx: 0,
     lines: [{
             id: 1,
-            txt: 'hello canvas',
+            txt: '',
             fontFamily: 'Impact',
             fontSize: 48,
             align: 'center',
             xPos: 250,
-            yPos: 40,
+            yPos: 60,
             width: 400,
             height: 50,
         },
         {
             id: 2,
-            txt: 'Holly Guacamolys',
+            txt: '',
             fontFamily: 'Impact',
             fontSize: 48,
             align: 'center',
             xPos: 250,
-            yPos: 450,
+            yPos: 460,
             width: 400,
             height: 50,
         }
@@ -126,8 +126,6 @@ function setCanvas(elCanvas) {
 
 function renderImg(elImg) {
     if (!elImg) return;
-
-
     gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height);
 }
 
@@ -140,12 +138,18 @@ function getImages() {
     return gImgs;
 }
 
+function getCanvas() {
+    return gCanvas;
+}
+
 function resizeCanvas() {
     var elCanvas = document.querySelector('#myCanvas');
     var elContainer = document.querySelector('.meme-editor');
-    console.log(elContainer.offsetWidth);
-
     if (elContainer.offsetWidth > 500) return;
+    if (!elContainer.offsetWidth) {
+        elCanvas.width = 500;
+        elCanvas.height = 500;
+    }
     elCanvas.width = elContainer.offsetWidth;
     elCanvas.height = elContainer.offsetWidth;
 }
