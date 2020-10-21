@@ -25,7 +25,7 @@
     <div class="meme-editor container">
 
         <div class="canvas-container">
-            <canvas id="myCanvas" width="500" height="500"></canvas>
+            <canvas id="myCanvas" width="500" height="500" onclick="onChooseItem()"></canvas>
         </div>
 
         <div class="box-control flex column">
@@ -34,8 +34,8 @@
 
                 <label for="meme-title">Meme Title:</label>
                 <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)" data-id="0" onfocus="onChooseTxt(this)">
-                <label for="meme-title">Meme Title-2:</label>
-                <input type="text" id="meme-title-2" class="meme-title-2" oninput="onChangeTxt(value)" data-id="1" onfocus="onChooseTxt(this)">
+                <!-- <label for="meme-title">Meme Title-2:</label>
+                <input type="text" id="meme-title-2" class="meme-title" oninput="onChangeTxt(value)" data-id="1" onfocus="onChooseTxt(this)"> -->
 
             </div>
 
@@ -51,9 +51,9 @@
 
                 <button onclick="onIncreaseTxt()">Increase</button>
                 <button onclick="onDecreaseTxt()">Decrease</button>
-                <button>Align left</button>
-                <button>Align center</button>
-                <button>Align Right</button>
+                <button onclick="onAlignLeft()">Align left</button>
+                <button onclick="onAlignCenter()">Align center</button>
+                <button onclick="onAlignRight()">Align Right</button>
             </div>
 
             <div class="stickers-section flex"></div>

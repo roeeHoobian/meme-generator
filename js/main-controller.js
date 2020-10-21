@@ -15,36 +15,55 @@ function renderCanvas() {
 function onSwitchLine() {
     var lines = getLines();
     if (!lines) return;
+    document.querySelector('.meme-title').focus();
     var currLineIdx = getCurrLineIdx();
+    console.log('currLineIdx', currLineIdx);
     if (currLineIdx === lines.length - 1) {
         switchToLine(0);
+        renderCanvas();
+        drawRect();
         return;
     }
-    switchToLine(currLineIdx + 1);
+    switchToLine(++currLineIdx);
+    renderCanvas();
+    drawRect();
 }
 
+function onChooseItem() {
+    console.log(gMeme.selectedLineIdx);
+}
+
+
+function onAlignLeft() {
+    alignTxtLeft();
+    renderTxt();
+}
 
 
 function onMoveTxtDown() {
     moveTxtDown();
     renderCanvas();
+    drawRect();
 }
 
 
 function onMoveTxtUp() {
     moveTxtUp();
     renderCanvas();
+    drawRect();
 }
 
 
 function onDecreaseTxt() {
     decrearseTxt();
     renderCanvas();
+    drawRect();
 }
 
 function onIncreaseTxt() {
     increaseTxt();
     renderCanvas();
+    drawRect();
 }
 
 function onRenderTxt() {
@@ -53,15 +72,18 @@ function onRenderTxt() {
     drawText(txt);
 }
 
-function onChangeTxt(txt, txtId) {
-    setTxt(txt, txtId);
+function onChangeTxt(txt) {
+    setTxt(txt);
     renderCanvas();
+    drawRect();
 }
 
 
 function onChooseTxt(elTxt) {
-    var txtId = Number(elTxt.dataset.id);
-    setSelectedTxt(txtId);
+    // var txtId = Number(elTxt.dataset.id);
+    // setSelectedTxt(txtId);
+    renderCanvas();
+    drawRect();
 }
 
 function onChooseImg(imgId) {

@@ -11,7 +11,7 @@ var gImgs = [
 
 var gMeme = {
     selectedImgId: 1,
-    SelectedLineIdx: 0,
+    selectedLineIdx: 0,
     lines: [{
             id: 1,
             txt: '',
@@ -19,7 +19,7 @@ var gMeme = {
             fontSize: 48,
             align: 'center',
             xPos: 250,
-            yPos: 60,
+            yPos: 20,
             width: 400,
             height: 50,
         },
@@ -30,7 +30,7 @@ var gMeme = {
             fontSize: 48,
             align: 'center',
             xPos: 250,
-            yPos: 460,
+            yPos: 430,
             width: 400,
             height: 50,
         }
@@ -39,24 +39,36 @@ var gMeme = {
 
 }
 
-function clearTxt() {
-    gCtx.clearRect(gMeme.lines[gMeme.SelectedLineIdx].xPos, gMeme.lines[gMeme.SelectedLineIdx].yPos, 400, 70);
+function getXPos() {
+    console.log(gCanvas.width / 2);
+
+    return gCanvas.width / 2
 }
+
+function drawRect() {
+    gCtx.beginPath();
+    gCtx.lineWidth = '2';
+    gCtx.rect(0, gMeme.lines[gMeme.selectedLineIdx].yPos, 500, gMeme.lines[gMeme.selectedLineIdx].fontSize);
+    gCtx.strokeStyle = 'red';
+    gCtx.stroke();
+}
+
 
 function renderTxt() {
     gMeme.lines.forEach((line) => {
-        drawText(line.txt, line.fontSize, line.xPos, line.yPos);
+        drawText(line.txt, line.fontSize, line.xPos, line.yPos, line.align);
     })
 }
 
 
-function drawText(text, fontSize, xPos, yPos) {
+function drawText(text, fontSize, xPos, yPos, align) {
     var size = fontSize;
     var strokeColor = 'black';
     var fillColor = 'white';
     gCtx.lineWidth = '1';
+    gCtx.textBaseline = "top";
     gCtx.font = `${size}px Impact`;
-    gCtx.textAlign = 'center';
+    gCtx.textAlign = align;
     gCtx.strokeStyle = strokeColor;
     gCtx.fillStyle = fillColor;
     gCtx.fillText(text, xPos, yPos);
@@ -65,8 +77,8 @@ function drawText(text, fontSize, xPos, yPos) {
 }
 
 
-function switchToLine(nextLine) {
-    gMeme.SelectedLineIdx = nextLine;
+function switchToLine(nextIdx) {
+    gMeme.selectedLineIdx = nextIdx
 }
 
 
@@ -75,41 +87,41 @@ function getLines() {
 }
 
 function getCurrLineIdx() {
-    return gMeme.SelectedLineIdx;
+    return gMeme.selectedLineIdx;
 }
 
 
-function setSelectedTxt(txtId) {
-    gMeme.SelectedLineIdx = txtId;
-}
+// function setSelectedTxt(txtId) {
+//     gMeme.selectedLineIdx = txtId;
+// }
 
 
 function moveTxtUp() {
-    gMeme.lines[gMeme.SelectedLineIdx].yPos -= 10;
+    gMeme.lines[gMeme.selectedLineIdx].yPos -= 10;
 }
 
 
 function moveTxtDown() {
-    gMeme.lines[gMeme.SelectedLineIdx].yPos += 10;
+    gMeme.lines[gMeme.selectedLineIdx].yPos += 10;
 }
 
 
 
 function decrearseTxt() {
-    gMeme.lines[gMeme.SelectedLineIdx].fontSize -= 6;
+    gMeme.lines[gMeme.selectedLineIdx].fontSize -= 6;
 }
 
 
 function increaseTxt() {
-    gMeme.lines[gMeme.SelectedLineIdx].fontSize += 6;
+    gMeme.lines[gMeme.selectedLineIdx].fontSize += 6;
 }
 
 function getTxt() {
-    return gMeme.lines[gMeme.SelectedLineIdx].txt;
+    return gMeme.lines[gMeme.selectedLineIdx].txt;
 }
 
 function setTxt(txt) {
-    gMeme.lines[gMeme.SelectedLineIdx].txt = txt;
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
 
