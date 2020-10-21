@@ -11,10 +11,18 @@
 <body onload="onInit()">
 
     <header class="main-header">
-        <h1 class="logo">MemeGen</h1>
+        <div class="header-container container">
+            <h1 class="logo">MemeGen</h1>
+            <ul class="main-nav">
+                <li class="gallery"><a href="#">Gallery</a></li>
+                <li class="mems"><a href="#">Saved Mems</a></li>
+                <li class="about"><a href="#">About</a></li>
+            </ul>
+
+        </div>
     </header>
 
-    <div class="meme-editor">
+    <div class="meme-editor container">
 
         <div class="canvas-container">
             <canvas id="myCanvas" width="500" height="500"></canvas>
@@ -35,7 +43,7 @@
 
     </div>
 
-    <div class="image-gallery">
+    <div class="image-gallery container">
 
     </div>
 

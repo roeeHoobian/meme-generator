@@ -18,8 +18,8 @@ var gMeme = {
             fontFamily: 'Impact',
             fontSize: 48,
             align: 'center',
-            xPos: 50,
-            yPos: 50,
+            xPos: 250,
+            yPos: 40,
             width: 400,
             height: 50,
         },
@@ -29,8 +29,8 @@ var gMeme = {
             fontFamily: 'Impact',
             fontSize: 48,
             align: 'center',
-            xPos: 50,
-            yPos: 350,
+            xPos: 250,
+            yPos: 450,
             width: 400,
             height: 50,
         }
@@ -50,15 +50,13 @@ function renderTxt() {
 }
 
 
-
-
 function drawText(text, fontSize, xPos, yPos) {
     var size = fontSize;
     var strokeColor = 'black';
     var fillColor = 'white';
     gCtx.lineWidth = '1';
     gCtx.font = `${size}px Impact`;
-    gCtx.textAlign = 'start';
+    gCtx.textAlign = 'center';
     gCtx.strokeStyle = strokeColor;
     gCtx.fillStyle = fillColor;
     gCtx.fillText(text, xPos, yPos);
@@ -115,7 +113,6 @@ function setTxt(txt) {
 }
 
 
-
 function getImgId() {
     return gMeme.selectedImgId;
 }
@@ -127,11 +124,11 @@ function setCanvas(elCanvas) {
 
 
 
-
-
 function renderImg(elImg) {
     if (!elImg) return;
-    gCtx.drawImage(elImg, 0, 0);
+
+
+    gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height);
 }
 
 
@@ -145,10 +142,10 @@ function getImages() {
 
 function resizeCanvas() {
     var elCanvas = document.querySelector('#myCanvas');
-    var elContainer = document.querySelector('.canvas-container');
+    var elContainer = document.querySelector('.meme-editor');
+    console.log(elContainer.offsetWidth);
 
-    console.log(elContainer);
-
+    if (elContainer.offsetWidth > 500) return;
     elCanvas.width = elContainer.offsetWidth;
-    elCanvas.height = elContainer.offsetHeight;
+    elCanvas.height = elContainer.offsetWidth;
 }

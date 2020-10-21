@@ -34,7 +34,6 @@ function onMoveTxtDown() {
 function onMoveTxtUp() {
     moveTxtUp();
     renderCanvas();
-
 }
 
 
@@ -44,10 +43,8 @@ function onDecreaseTxt() {
 }
 
 function onIncreaseTxt() {
-    // clearTxt();
     increaseTxt();
     renderCanvas();
-
 }
 
 function onRenderTxt() {
