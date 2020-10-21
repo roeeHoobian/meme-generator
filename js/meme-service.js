@@ -22,6 +22,17 @@ var gMeme = {
             yPos: 50,
             width: 400,
             height: 50,
+        },
+        {
+            id: 2,
+            txt: 'Holly Guacamolys',
+            fontFamily: 'Impact',
+            fontSize: 48,
+            align: 'center',
+            xPos: 50,
+            yPos: 350,
+            width: 400,
+            height: 50,
         }
 
     ],
@@ -32,8 +43,17 @@ function clearTxt() {
     gCtx.clearRect(gMeme.lines[gMeme.SelectedLineIdx].xPos, gMeme.lines[gMeme.SelectedLineIdx].yPos, 400, 70);
 }
 
-function drawText(text) {
-    var size = gMeme.lines[gMeme.SelectedLineIdx].fontSize;
+function renderTxt() {
+    gMeme.lines.forEach((line) => {
+        drawText(line.txt, line.fontSize, line.xPos, line.yPos);
+    })
+}
+
+
+
+
+function drawText(text, fontSize, xPos, yPos) {
+    var size = fontSize;
     var strokeColor = 'black';
     var fillColor = 'white';
     gCtx.lineWidth = '1';
@@ -41,10 +61,40 @@ function drawText(text) {
     gCtx.textAlign = 'start';
     gCtx.strokeStyle = strokeColor;
     gCtx.fillStyle = fillColor;
-    gCtx.fillText(text, 50, 70);
-    gCtx.strokeText(text, 50, 70);
+    gCtx.fillText(text, xPos, yPos);
+    gCtx.strokeText(text, xPos, yPos);
 
 }
+
+
+function switchToLine(nextLine) {
+    gMeme.SelectedLineIdx = nextLine;
+}
+
+
+function getLines() {
+    return gMeme.lines;
+}
+
+function getCurrLineIdx() {
+    return gMeme.SelectedLineIdx;
+}
+
+
+function setSelectedTxt(txtId) {
+    gMeme.SelectedLineIdx = txtId;
+}
+
+
+function moveTxtUp() {
+    gMeme.lines[gMeme.SelectedLineIdx].yPos -= 10;
+}
+
+
+function moveTxtDown() {
+    gMeme.lines[gMeme.SelectedLineIdx].yPos += 10;
+}
+
 
 
 function decrearseTxt() {
@@ -75,6 +125,10 @@ function setCanvas(elCanvas) {
     gCtx = gCanvas.getContext('2d');
 }
 
+
+
+
+
 function renderImg(elImg) {
     if (!elImg) return;
     gCtx.drawImage(elImg, 0, 0);
@@ -87,4 +141,14 @@ function setImg(imgId) {
 
 function getImages() {
     return gImgs;
+}
+
+function resizeCanvas() {
+    var elCanvas = document.querySelector('#myCanvas');
+    var elContainer = document.querySelector('.canvas-container');
+
+    console.log(elContainer);
+
+    elCanvas.width = elContainer.offsetWidth;
+    elCanvas.height = elContainer.offsetHeight;
 }

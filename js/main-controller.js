@@ -1,6 +1,7 @@
 'use strict';
 
 function onInit() {
+    resizeCanvas();
     var elCanvas = document.querySelector('#myCanvas');
     setCanvas(elCanvas);
     renderImageGallery();
@@ -9,6 +10,31 @@ function onInit() {
 function renderCanvas() {
     onRenderImg();
     onRenderTxt();
+}
+
+function onSwitchLine() {
+    var lines = getLines();
+    if (!lines) return;
+    var currLineIdx = getCurrLineIdx();
+    if (currLineIdx === lines.length - 1) {
+        switchToLine(0);
+        return;
+    }
+    switchToLine(currLineIdx + 1);
+}
+
+
+
+function onMoveTxtDown() {
+    moveTxtDown();
+    renderCanvas();
+}
+
+
+function onMoveTxtUp() {
+    moveTxtUp();
+    renderCanvas();
+
 }
 
 
@@ -24,10 +50,8 @@ function onIncreaseTxt() {
 
 }
 
-
-
-
 function onRenderTxt() {
+    renderTxt();
     var txt = getTxt();
     drawText(txt);
 }
@@ -37,6 +61,11 @@ function onChangeTxt(txt, txtId) {
     renderCanvas();
 }
 
+
+function onChooseTxt(elTxt) {
+    var txtId = Number(elTxt.dataset.id);
+    setSelectedTxt(txtId);
+}
 
 function onChooseImg(imgId) {
     setImg(imgId);

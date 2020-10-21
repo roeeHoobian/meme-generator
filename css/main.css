@@ -1,8 +1,38 @@
+body {
+    background-color: lightcyan;
+}
+
 .meme-editor {
     display: flex;
+    flex-direction: column;
+    border: 2px solid gray;
+}
+
+.box-control {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    margin: 0 auto;
+    border: 2px solid gray;
+}
+
+.canvas-container {
+    margin: 0 auto;
+    border: 2px solid gray;
+}
+
+.box-control>* {
+    margin-bottom: 5px;
 }
 
 .image-gallery img {
     width: 100px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+@media(min-width: 980px) {
+    .meme-editor {
+        display: flex;
+        flex-direction: row;
+    }
 }

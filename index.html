@@ -22,10 +22,15 @@
 
         <div class="box-control">
             <label for="meme-title">Meme Title:</label>
-            <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)">
+            <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)" data-id="0" onfocus="onChooseTxt(this)">
+            <label for="meme-title">Meme Title-2:</label>
+            <input type="text" id="meme-title-2" class="meme-title-2" oninput="onChangeTxt(value)" data-id="1" onfocus="onChooseTxt(this)">
 
             <button onclick="onIncreaseTxt()">Increase</button>
             <button onclick="onDecreaseTxt()">Decrease</button>
+            <button onclick="onMoveTxtUp()">Move Up</button>
+            <button onclick="onMoveTxtDown()">Move Down</button>
+            <button onclick="onSwitchLine()">Switch Line</button>
         </div>
 
     </div>
