@@ -1,0 +1,8 @@
+.meme-editor {
+    display: flex;
+}
+
+.image-gallery img {
+    width: 100px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

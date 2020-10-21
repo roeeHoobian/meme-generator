@@ -8,9 +8,28 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body>
+<body onload="onInit()">
 
+    <header class="main-header">
+        <h1 class="logo">MemeGen</h1>
+    </header>
 
+    <div class="meme-editor">
+
+        <div class="canvas-container">
+            <canvas id="myCanvas" width="500" height="500"></canvas>
+        </div>
+
+        <div class="box-control">
+            <label for="meme-title">Meme Title:</label>
+            <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)">
+        </div>
+
+    </div>
+
+    <div class="image-gallery">
+
+    </div>
 
 
     <script src="js/meme-service.js"></script>
