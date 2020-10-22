@@ -14,18 +14,22 @@ function renderCanvas() {
 
 function onSwitchLine() {
     var lines = getLines();
-    if (!lines) return;
+    if (!lines.length) return;
     document.querySelector('.meme-title').focus();
     var currLineIdx = getCurrLineIdx();
     if (currLineIdx === lines.length - 1) {
         switchToLine(0);
         document.querySelector('.meme-title').value = getTxt();
+        document.querySelector('.stroke-color').value = getStrokeColor();
+        document.querySelector('.fill-color').value = getFillColor();
         renderCanvas();
         drawRect();
         return;
     }
     switchToLine(++currLineIdx);
     document.querySelector('.meme-title').value = getTxt();
+    document.querySelector('.stroke-color').value = getStrokeColor();
+    document.querySelector('.fill-color').value = getFillColor();
     renderCanvas();
     drawRect();
 }
@@ -34,8 +38,18 @@ function onSwitchLine() {
 
 
 
-function onChooseItem() { //////////////////////////todo
-    console.log(gMeme.selectedLineIdx);
+function onSelectLine(ev) {
+    var lines = getLines();
+    lines.forEach((line) => {
+        if (ev.offsetX > line.xPos && ev.offsetX < line.xPos + line.width &&
+            ev.offsetY > line.yPos && ev.offsetY < line.yPos + line.height) {
+            updateSelectedLineIdx(line.id);
+        }
+        renderCanvas();
+        renderTxt();
+        drawRect();
+    })
+
 
 }
 
@@ -46,6 +60,7 @@ function onDeleteLine() {
     drawRect();
     var lines = getLines();
     if (!lines.length) {
+        resetIdCounter();
         document.querySelector('.meme-title').value = '';
         return;
     }
@@ -57,13 +72,15 @@ function onAddLine() {
     if (lines.length === 0) {
         addNewLine(250, 20);
     } else if (lines.length === 1) {
-        addNewLine(250, 430);
-        gYPos = 200;
+        var canvasHeight = getCanvasHeight();
+        addNewLine(250, canvasHeight - 70);
+        gYPos = canvasHeight / 2;
     } else {
         addNewLine(250, gYPos);
         gYPos += 50;
     }
     onSwitchLine();
+    onAlignCenter();
 }
 
 function onChooseFillColor(color) {
@@ -146,8 +163,14 @@ function onChangeTxt(txt) {
 
 
 function onChooseTxt() {
+    document.querySelector('.stroke-color').value = getStrokeColor();
+    document.querySelector('.fill-color').value = getFillColor();
     renderCanvas();
     drawRect();
+}
+
+function onHideEditor() {
+    document.querySelector('.meme-editor').classList.remove('show');
 }
 
 function onChooseImg(imgId) {
@@ -184,4 +207,9 @@ function onDownloadCanvas(elLink) {
 function onResizeCanvas() {
     resizeCanvas();
     renderCanvas();
+}
+
+function onShowMenu() {
+    document.querySelector('.main-nav').classList.toggle('show');
+
 }

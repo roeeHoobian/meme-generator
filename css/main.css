@@ -46,10 +46,24 @@ a {
 .header-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
     margin-left: 20px;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.main-header svg {
+    width: 30px;
+    fill: white;
 }
 
 
@@ -101,6 +115,10 @@ a {
 .box-control .edit-section {
     background-color: #19a59f;
     border-radius: 15px;
+    flex-wrap: wrap;
+}
+
+.move-section {
     flex-wrap: wrap;
 }
 
@@ -159,5 +177,31 @@ a {
         position: relative;
         width: 100%;
         margin-bottom: 20px;
+    }
+}
+
+@media (max-width:680px) {
+    .container {
+        max-width: 550px;
+    }
+    .main-nav {
+        flex-direction: column;
+        display: none;
+        position: absolute;
+        top: 57px;
+        right: 0;
+        background-color: white;
+        z-index: 2;
+        margin: 0;
+    }
+    .show {
+        display: flex;
+    }
+    .logo {
+        margin: 10px 10px;
+    }
+    .mobile-menu-btn {
+        display: flex;
+        margin-right: 10px;
     }
 }

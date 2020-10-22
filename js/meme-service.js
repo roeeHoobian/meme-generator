@@ -2,6 +2,9 @@
 
 var gCanvas;
 var gCtx;
+var gNextId = 0;
+
+
 var gImgs = [
     { id: 1, url: "img/1.jpg", keywords: [] },
     { id: 2, url: "img/2.jpg", keywords: [] },
@@ -13,15 +16,15 @@ var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [{
-            id: 1,
+            id: getNewId(),
             txt: '',
             fontFamily: 'Impact',
             fontSize: 48,
             align: 'center',
             xPos: 250,
             yPos: 20,
-            strokeColor: 'black',
-            fillColor: 'white',
+            strokeColor: '#000000',
+            fillColor: '#ffffff',
             width: 400,
             height: 50,
         }
@@ -31,9 +34,22 @@ var gMeme = {
 
 }
 
+function getNewId() {
+    return gNextId++;
+}
+
+function resetIdCounter() {
+    gNextId = 0;
+}
+
+
+
+function updateSelectedLineIdx(lineId) {
+    gMeme.selectedLineIdx = lineId;
+}
+
 function getXPos() {
     console.log(gCanvas.width / 2);
-
     return gCanvas.width / 2
 }
 
@@ -75,19 +91,25 @@ function switchToLine(nextIdx) {
 
 function addNewLine(x, y) {
     var line = {
-        id: 2,
+        id: getNewId(),
         txt: '',
         fontFamily: 'Impact',
         fontSize: 48,
         align: 'center',
         xPos: x,
         yPos: y,
-        strokeColor: 'black',
-        fillColor: 'white',
-        width: 400,
+        strokeColor: '#000000',
+        fillColor: '#ffffff',
+        width: gCanvas.width,
         height: 50,
     }
     gMeme.lines.push(line);
+}
+
+
+
+function getCanvasHeight() {
+    return gCanvas.height;
 }
 
 function getLines() {
@@ -111,7 +133,18 @@ function deleteLine() {
     }
 }
 
+function getFillColor() {
+    if (!gMeme.lines.length) return;
+    if (!gMeme.lines[gMeme.selectedLineIdx].fillColor) return;
+    return gMeme.lines[gMeme.selectedLineIdx].fillColor;
+}
 
+
+function getStrokeColor() {
+    if (!gMeme.lines.length) return;
+    if (!gMeme.lines[gMeme.selectedLineIdx].strokeColor) return;
+    return gMeme.lines[gMeme.selectedLineIdx].strokeColor;
+}
 
 function changeFillColor(color) {
     if (!gMeme.lines[gMeme.selectedLineIdx]) return;
