@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body onload="onInit()">
+<body onload="onInit()" onresize="onResizeCanvas()">
 
     <header class="main-header">
         <div class="header-container container">
@@ -18,7 +18,6 @@
                 <li class="mems"><a href="#">Saved Mems</a></li>
                 <li class="about"><a href="#">About</a></li>
             </ul>
-
         </div>
     </header>
 
@@ -34,8 +33,7 @@
 
                 <label for="meme-title">Meme Title:</label>
                 <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)" data-id="0" onfocus="onChooseTxt(this)">
-                <!-- <label for="meme-title">Meme Title-2:</label>
-                <input type="text" id="meme-title-2" class="meme-title" oninput="onChangeTxt(value)" data-id="1" onfocus="onChooseTxt(this)"> -->
+
 
             </div>
 
@@ -56,6 +54,8 @@
                 <button onclick="onAlignLeft()">Align left</button>
                 <button onclick="onAlignCenter()">Align center</button>
                 <button onclick="onAlignRight()">Align Right</button>
+                <input type="color" oninput="onChooseStrokeColor(value)">
+                <input type="color" oninput="onChooseFillColor(value)">
             </div>
 
             <div class="stickers-section flex"></div>

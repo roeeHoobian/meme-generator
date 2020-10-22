@@ -1,11 +1,10 @@
 'use strict';
-var gYPos = 100;
+var gYPos = 200;
 
 function onInit() {
     var elCanvas = document.querySelector('#myCanvas');
     setCanvas(elCanvas);
     renderImageGallery();
-    // resizeCanvas();
 }
 
 function renderCanvas() {
@@ -35,16 +34,22 @@ function onSwitchLine() {
 
 
 
-function onChooseItem() {
+function onChooseItem() { //////////////////////////todo
     console.log(gMeme.selectedLineIdx);
+
 }
 
 function onDeleteLine() {
     deleteLine();
-    renderTxt();
     renderCanvas();
+    renderTxt();
     drawRect();
-
+    var lines = getLines();
+    if (!lines.length) {
+        document.querySelector('.meme-title').value = '';
+        return;
+    }
+    document.querySelector('.meme-title').value = getTxt();
 }
 
 function onAddLine() {
@@ -53,7 +58,7 @@ function onAddLine() {
         addNewLine(250, 20);
     } else if (lines.length === 1) {
         addNewLine(250, 430);
-        gYPos = 100;
+        gYPos = 200;
     } else {
         addNewLine(250, gYPos);
         gYPos += 50;
@@ -61,9 +66,43 @@ function onAddLine() {
     onSwitchLine();
 }
 
+function onChooseFillColor(color) {
+    changeFillColor(color);
+    renderCanvas();
+    renderTxt();
+    drawRect();
+}
+
+
+
+function onChooseStrokeColor(color) {
+    changeStrokeColor(color);
+    renderCanvas();
+    renderTxt();
+    drawRect();
+}
+
+
+
+function onAlignRight() {
+    alignTxtRight();
+    renderCanvas();
+    renderTxt();
+    drawRect();
+}
+
+function onAlignCenter() {
+    alignTxtCenter();
+    renderCanvas();
+    renderTxt();
+    drawRect();
+}
+
 function onAlignLeft() {
     alignTxtLeft();
+    renderCanvas();
     renderTxt();
+    drawRect();
 }
 
 
@@ -106,17 +145,15 @@ function onChangeTxt(txt) {
 }
 
 
-function onChooseTxt(elTxt) {
-    // var txtId = Number(elTxt.dataset.id);
-    // setSelectedTxt(txtId);
+function onChooseTxt() {
     renderCanvas();
     drawRect();
 }
 
 function onChooseImg(imgId) {
-    // resizeCanvas();
     setImg(imgId);
     document.querySelector('.meme-editor').classList.add('show');
+    resizeCanvas();
     renderCanvas();
 }
 
@@ -142,4 +179,9 @@ function onDownloadCanvas(elLink) {
     const data = canvas.toDataURL();
     elLink.href = data;
     elLink.download = 'my-meme.jpg';
+}
+
+function onResizeCanvas() {
+    resizeCanvas();
+    renderCanvas();
 }
