@@ -116,6 +116,7 @@ a {
     background-color: #19a59f;
     border-radius: 15px;
     flex-wrap: wrap;
+    padding: 20px;
 }
 
 .move-section {

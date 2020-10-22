@@ -20,15 +20,22 @@
             </ul>
 
             <button class="mobile-menu-btn" onclick="onShowMenu()">
-                <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M12 24C5.383 24 0 18.617 0 12S5.383 0 12 0s12 5.383 12 12-5.383 12-12 12zm0-23C5.935 1 1 5.935 1 12s4.935 11 11 11 11-4.935 11-11S18.065 1 12 1z"></path><path d="M16.5 8h-9a.5.5 0 010-1h9a.5.5 0 010 1zM16.5 12.5h-9a.5.5 0 010-1h9a.5.5 0 010 1zM16.5 17h-9a.5.5 0 010-1h9a.5.5 0 010 1z"></path></svg>
-               </button>
+                <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 24C5.383 24 0 18.617 0 12S5.383 0 12 0s12 5.383 12 12-5.383 12-12 12zm0-23C5.935 1 1 5.935 1 12s4.935 11 11 11 11-4.935 11-11S18.065 1 12 1z">
+                    </path>
+                    <path
+                        d="M16.5 8h-9a.5.5 0 010-1h9a.5.5 0 010 1zM16.5 12.5h-9a.5.5 0 010-1h9a.5.5 0 010 1zM16.5 17h-9a.5.5 0 010-1h9a.5.5 0 010 1z">
+                    </path>
+                </svg>
+            </button>
         </div>
     </header>
 
     <div class="meme-editor container">
 
         <div class="canvas-container">
-            <canvas id="myCanvas" width="500" height="500" onclick="onSelectLine(event)"></canvas>
+            <canvas id="myCanvas" width="500" height="500" onmousedown="onSelectLine(event)" onmousemove="onDragLine(event)" onmouseup="onReleaseLine()"></canvas>
         </div>
 
         <div class="box-control flex column">
@@ -58,8 +65,17 @@
                 <button onclick="onAlignLeft()">Align left</button>
                 <button onclick="onAlignCenter()">Align center</button>
                 <button onclick="onAlignRight()">Align Right</button>
-                <input type="color" class="stroke-color" oninput="onChooseStrokeColor(value)">
-                <input type="color" class="fill-color" oninput="onChooseFillColor(value)">
+                <input type="color" class="stroke-color" value="#000000" oninput="onChooseStrokeColor(value)">
+                <input type="color" class="fill-color" value="#ffffff" oninput="onChooseFillColor(value)">
+
+                <select onchange="onSetFontFamily(value)" class="fonts-menu">
+
+                    <option value="Impact">impact</option>
+                    <option value="Cambria">Cambria</option>
+                    <option value="cursive">cursive</option>
+
+                </select>
+
             </div>
 
             <div class="stickers-section flex"></div>
