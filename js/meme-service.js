@@ -8,7 +8,13 @@ var gImgs = [
     { id: 1, url: "img/1.jpg", keywords: [] },
     { id: 2, url: "img/2.jpg", keywords: [] },
     { id: 3, url: "img/3.jpg", keywords: [] },
-    { id: 4, url: "img/4.jpg", keywords: [] }
+    { id: 4, url: "img/4.jpg", keywords: [] },
+    { id: 5, url: "img/5.jpg", keywords: [] },
+    { id: 6, url: "img/6.jpg", keywords: [] },
+    { id: 7, url: "img/7.jpg", keywords: [] },
+    { id: 8, url: "img/8.jpg", keywords: [] },
+    { id: 9, url: "img/9.jpg", keywords: [] },
+    { id: 10, url: "img/10.jpg", keywords: [] },
 ]
 
 var gMeme = {

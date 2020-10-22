@@ -9,16 +9,14 @@
 </head>
 
 <body onload="onInit()" onresize="onResizeCanvas()">
-
     <header class="main-header">
         <div class="header-container container">
             <h1 class="logo">MemeGen</h1>
             <ul class="main-nav">
-                <li class="gallery"><a href="#" onclick="onHideEditor()">Gallery</a></li>
-                <li class="mems"><a href="#">Saved Mems</a></li>
-                <li class="about"><a href="#">About</a></li>
+                <li class="gallery"><a class="active" href="#" onclick="onHideEditor()">Gallery</a></li>
+                <li class="mems"><a class="" href="#">Saved Mems</a></li>
+                <li class="about"><a class="" href="#">About</a></li>
             </ul>
-
             <button class="mobile-menu-btn" onclick="onShowMenu()">
                 <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -33,35 +31,28 @@
     </header>
 
     <div class="meme-editor container">
-
         <div class="canvas-container">
-            <canvas id="myCanvas" width="500" height="500" onmousedown="onSelectLine(event)" onmousemove="onDragLine(event)" onmouseup="onReleaseLine()"></canvas>
+            <canvas id="myCanvas" width="500" height="500" onmousedown="onSelectLine(event)" onmousemove="onDragLine(event)" onmouseup="onReleaseLine()">
+            </canvas>
         </div>
 
         <div class="box-control flex column">
-
-            <div class="txt-section flex column">
-
-                <label for="meme-title">Meme Title:</label>
-                <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)" data-id="0" onfocus="onChooseTxt(this)">
-
-
+            <div class="txt-section flex row">
+                <label for="meme-title"></label>
+                <input type="text" id="meme-title" class="meme-title" oninput="onChangeTxt(value)" data-id="0" onfocus="onChooseTxt(this)" placeholder="Enter your texts here">
             </div>
 
             <div class="move-section flex">
-
-                <button onclick="onMoveTxtUp()">Move Up</button>
-                <button onclick="onMoveTxtDown()">Move Down</button>
-                <button onclick="onSwitchLine()">Switch Line</button>
-                <button onclick="onAddLine()">Add Line</button>
-                <button onclick="onDeleteLine()">Delete Line</button>
-
+                <button onclick="onMoveTxtUp()">Up</button>
+                <button onclick="onMoveTxtDown()">Down</button>
+                <button onclick="onSwitchLine()">Switch</button>
+                <button onclick="onAddLine()">Add</button>
+                <button onclick="onDeleteLine()">Delete</button>
             </div>
 
             <div class="edit-section flex">
-
-                <button onclick="onIncreaseTxt()">Increase</button>
-                <button onclick="onDecreaseTxt()">Decrease</button>
+                <button onclick="onIncreaseTxt()">Inc</button>
+                <button onclick="onDecreaseTxt()">Dec</button>
                 <button onclick="onAlignLeft()">Align left</button>
                 <button onclick="onAlignCenter()">Align center</button>
                 <button onclick="onAlignRight()">Align Right</button>
@@ -69,32 +60,22 @@
                 <input type="color" class="fill-color" value="#ffffff" oninput="onChooseFillColor(value)">
 
                 <select onchange="onSetFontFamily(value)" class="fonts-menu">
-
                     <option value="Impact">impact</option>
                     <option value="Cambria">Cambria</option>
                     <option value="cursive">cursive</option>
-
                 </select>
-
             </div>
 
             <div class="stickers-section flex"></div>
-
             <div class="save-section flex">
-                <button>Share</button>
-                <button><a href="#" onclick="onDownloadCanvas(this)" download=""> Save</a>
+                <button class="share">Share</button>
+                <button class="save"><a href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
                 </button>
             </div>
-
-
         </div>
-
     </div>
 
-    <div class="image-gallery container">
-
-    </div>
-
+    <div class="image-gallery container"></div>
 
     <script src="js/meme-service.js"></script>
     <script src="js/main-controller.js"></script>
