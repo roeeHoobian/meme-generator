@@ -9,10 +9,12 @@ function onInit() {
     renderImageGallery();
 }
 
+
 function renderCanvas() {
     onRenderImg();
     onRenderTxt();
 }
+
 
 function onSwitchLine() {
     var lines = getLines();
@@ -22,17 +24,16 @@ function onSwitchLine() {
     if (currLineIdx === lines.length - 1) {
         switchToLine(0);
         _updateControlBox()
-
         renderCanvas();
         drawRect();
         return;
     }
     switchToLine(++currLineIdx);
     _updateControlBox();
-
     renderCanvas();
     drawRect();
 }
+
 
 function onReleaseLine() {
     gIsLineDragable = false;
@@ -40,6 +41,7 @@ function onReleaseLine() {
     renderTxt();
     if (!gIsLineMoved) drawRect();
 }
+
 
 function onDragLine(ev) {
     if (gIsLineDragable) {
@@ -51,10 +53,11 @@ function onDragLine(ev) {
     }
 }
 
+
 function onSelectLine(ev) {
     var lines = getLines();
     lines.forEach((line) => {
-        if (ev.offsetX > line.xPos && ev.offsetX < line.xPos + line.width &&
+        if (ev.offsetX > line.xPos - (measureText(line.txt) / 2) && ev.offsetX < line.xPos + line.width &&
             ev.offsetY > line.yPos && ev.offsetY < line.yPos + line.height) {
             updateSelectedLineIdx(line.id);
             _updateControlBox();
@@ -65,7 +68,9 @@ function onSelectLine(ev) {
         }
     })
     gIsLineMoved = false;
+
 }
+
 
 function onDeleteLine() {
     deleteLine();
@@ -79,8 +84,8 @@ function onDeleteLine() {
         return;
     }
     _updateControlBox();
-
 }
+
 
 function onAddLine() {
     var lines = getLines();
@@ -105,7 +110,6 @@ function onSetFontFamily(fontName) {
     renderTxt();
 }
 
-
 function onChooseFillColor(color) {
     changeFillColor(color);
     renderCanvas();
@@ -113,15 +117,12 @@ function onChooseFillColor(color) {
     drawRect();
 }
 
-
-
 function onChooseStrokeColor(color) {
     changeStrokeColor(color);
     renderCanvas();
     renderTxt();
     drawRect();
 }
-
 
 
 function onAlignRight() {
@@ -145,20 +146,17 @@ function onAlignLeft() {
     drawRect();
 }
 
-
 function onMoveTxtDown() {
     moveTxtDown();
     renderCanvas();
     drawRect();
 }
 
-
 function onMoveTxtUp() {
     moveTxtUp();
     renderCanvas();
     drawRect();
 }
-
 
 function onDecreaseTxt() {
     decrearseTxt();
@@ -181,17 +179,17 @@ function onRenderTxt() {
 function onChangeTxt(txt) {
     setTxt(txt);
     renderCanvas();
-    drawRect();
+    drawRect(txt);
 }
 
-
 function onChooseTxt() {
-    if (!getLines()) return;
-    // document.querySelector('.stroke-color').value = getStrokeColor();
-    // document.querySelector('.fill-color').value = getFillColor();
+    if (getLines().length === 0) {
+        onAddLine();
+    }
     renderCanvas();
     drawRect();
 }
+
 
 function onHideEditor() {
     document.querySelector('.meme-editor').classList.remove('show');
@@ -209,6 +207,7 @@ function onRenderImg() {
     var elImg = document.querySelector(`.img-${imgId}`);
     renderImg(elImg);
 }
+
 
 function renderImageGallery() {
     var elGallery = document.querySelector('.image-gallery');
@@ -228,15 +227,18 @@ function onDownloadCanvas(elLink) {
     elLink.download = 'my-meme.jpg';
 }
 
+
 function onResizeCanvas() {
     resizeCanvas();
     renderCanvas();
 }
 
+
 function onShowMenu() {
     document.querySelector('.main-nav').classList.toggle('show');
 
 }
+
 
 function _updateControlBox() {
     document.querySelector('.meme-title').value = getTxt();

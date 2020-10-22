@@ -3,8 +3,6 @@
 var gCanvas;
 var gCtx;
 var gNextId = 0;
-// var gCurrFontFamily = 'Impact';
-
 
 var gImgs = [
     { id: 1, url: "img/1.jpg", keywords: [] },
@@ -17,23 +15,26 @@ var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [{
-            id: getNewId(),
-            txt: '',
-            fontFamily: 'Impact',
-            fontSize: 48,
-            align: 'center',
-            xPos: 250,
-            yPos: 20,
-            strokeColor: '#000000',
-            fillColor: '#ffffff',
-            width: 400,
-            height: 50,
-        }
-
-
-    ],
-
+        id: getNewId(),
+        txt: '',
+        fontFamily: 'Impact',
+        fontSize: 48,
+        align: 'center',
+        xPos: 250,
+        yPos: 20,
+        strokeColor: '#000000',
+        fillColor: '#ffffff',
+        width: 400,
+        height: 50,
+    }],
 }
+
+
+function measureText(txt) {
+    return gCtx.measureText(txt).width;
+}
+
+
 
 function getNewId() {
     return gNextId++;
@@ -42,7 +43,6 @@ function getNewId() {
 function resetIdCounter() {
     gNextId = 0;
 }
-
 
 
 function updateSelectedLineIdx(lineId) {
@@ -58,7 +58,7 @@ function drawRect() {
     if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     gCtx.beginPath();
     gCtx.lineWidth = '2';
-    gCtx.rect(2, gMeme.lines[gMeme.selectedLineIdx].yPos, gCanvas.width - 5, gMeme.lines[gMeme.selectedLineIdx].fontSize);
+    gCtx.rect(gMeme.lines[gMeme.selectedLineIdx].xPos - measureText(gMeme.lines[gMeme.selectedLineIdx].txt) / 2, gMeme.lines[gMeme.selectedLineIdx].yPos, measureText(gMeme.lines[gMeme.selectedLineIdx].txt), gMeme.lines[gMeme.selectedLineIdx].fontSize);
     gCtx.strokeStyle = 'red';
     gCtx.stroke();
 }
