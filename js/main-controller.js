@@ -7,6 +7,8 @@ function onInit() {
     var elCanvas = document.querySelector('#myCanvas');
     setCanvas(elCanvas);
     renderImageGallery();
+    onRenderEmojis()
+
 }
 
 
@@ -18,7 +20,7 @@ function renderCanvas() {
 
 function onSwitchLine() {
     var lines = getLines();
-    // if (!lines.length) return;
+    if (!lines.length) return;
     document.querySelector('.meme-title').focus();
     var currLineIdx = getCurrLineIdx();
     if (currLineIdx === lines.length - 1) {
@@ -46,7 +48,7 @@ function onAddLine() {
         gYPos += 50;
     }
     onSwitchLine();
-    onAlignCenter();
+    // onAlignCenter();
 }
 
 function onReleaseLine(ev) {
@@ -56,7 +58,7 @@ function onReleaseLine(ev) {
     var lines = getLines();
     lines.forEach((line) => {
         if (ev.offsetX > line.xPos - (measureText(line.txt) / 2) && ev.offsetX < line.xPos + (measureText(line.txt) / 2) &&
-            ev.offsetY > line.yPos && ev.offsetY < line.yPos + line.height && !gIsLineMoved) {
+            ev.offsetY > line.yPos && ev.offsetY < line.yPos + line.fontSize && !gIsLineMoved) {
             drawRect();
         }
     })
@@ -78,7 +80,7 @@ function onSelectLine(ev) {
     var lines = getLines();
     lines.forEach((line) => {
         if (ev.offsetX > line.xPos - (measureText(line.txt) / 2) && ev.offsetX < line.xPos + (measureText(line.txt) / 2) &&
-            ev.offsetY > line.yPos && ev.offsetY < line.yPos + line.height) {
+            ev.offsetY > line.yPos && ev.offsetY < line.yPos + line.fontSize) {
             updateSelectedLineIdx(line.id);
             _updateControlBox();
             gIsLineDragable = true;
@@ -190,8 +192,8 @@ function onChooseTxt() {
     if (getLines().length === 0) {
         onAddLine();
     }
-    // renderCanvas();
-    // drawRect();
+    renderCanvas();
+    drawRect();
 }
 
 
@@ -204,6 +206,7 @@ function onChooseImg(imgId) {
     document.querySelector('.meme-editor').classList.add('show');
     resizeCanvas();
     renderCanvas();
+    scrollTo(0, 0)
 }
 
 function onRenderImg() {
@@ -249,4 +252,21 @@ function _updateControlBox() {
     document.querySelector('.stroke-color').value = getStrokeColor();
     document.querySelector('.fill-color').value = getFillColor();
     document.querySelector('.fonts-menu').value = getFontName();
+}
+
+
+function onRenderEmojis() {
+    var strHtml = '';
+    var emojis = getEmojiz();
+
+    // for (var i = 0; i < 5; i++) {
+    //     strHtml += `
+    //     <h1>${emojis[i]}</h1>
+    //     `
+    // }
+    // console.log(strHtml);
+
+    // document.querySelector('.stickers-section-container').innerHTML = strHtml;
+
+    // renderEmojis(getEmojiz());
 }

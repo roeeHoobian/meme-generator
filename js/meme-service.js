@@ -15,6 +15,14 @@ var gImgs = [
     { id: 8, url: "img/8.jpg", keywords: [] },
     { id: 9, url: "img/9.jpg", keywords: [] },
     { id: 10, url: "img/10.jpg", keywords: [] },
+    { id: 11, url: "img/11.jpg", keywords: [] },
+    { id: 12, url: "img/12.jpg", keywords: [] },
+    { id: 13, url: "img/13.jpg", keywords: [] },
+    { id: 14, url: "img/14.jpg", keywords: [] },
+    { id: 15, url: "img/15.jpg", keywords: [] },
+    { id: 16, url: "img/16.jpg", keywords: [] },
+    { id: 17, url: "img/17.jpg", keywords: [] },
+    { id: 18, url: "img/18.jpg", keywords: [] },
 ]
 
 var gMeme = {
@@ -205,14 +213,12 @@ function moveTxtDown() {
 function decrearseTxt() {
     if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     gMeme.lines[gMeme.selectedLineIdx].fontSize -= 6;
-    // gMeme.lines[gMeme.selectedLineIdx].height -= 6;
 }
 
 
 function increaseTxt() {
     if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     gMeme.lines[gMeme.selectedLineIdx].fontSize += 6;
-    // gMeme.lines[gMeme.selectedLineIdx].height += 6;
 }
 
 function getTxt() {
@@ -267,5 +273,6 @@ function resizeCanvas() {
 }
 
 function _initTxtSettings() {
+    if (!gMeme.lines.length) return;
     gMeme.lines[gMeme.selectedLineIdx].xPos = gCanvas.width / 2;
 }
