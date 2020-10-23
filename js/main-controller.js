@@ -18,7 +18,7 @@ function renderCanvas() {
 
 function onSwitchLine() {
     var lines = getLines();
-    if (!lines.length) return;
+    // if (!lines.length) return;
     document.querySelector('.meme-title').focus();
     var currLineIdx = getCurrLineIdx();
     if (currLineIdx === lines.length - 1) {
@@ -34,6 +34,20 @@ function onSwitchLine() {
     drawRect();
 }
 
+function onAddLine() {
+    var lines = getLines();
+    if (lines.length === 0) {
+        addNewLine(getCanvasWidth() / 2, 20);
+    } else if (lines.length === 1) {
+        addNewLine(getCanvasWidth() / 2, getCanvasHeight() - 70);
+        gYPos = getCanvasHeight() / 2;
+    } else {
+        addNewLine(getCanvasWidth() / 2, gYPos);
+        gYPos += 50;
+    }
+    onSwitchLine();
+    onAlignCenter();
+}
 
 function onReleaseLine(ev) {
     gIsLineDragable = false;
@@ -92,22 +106,6 @@ function onDeleteLine() {
     _updateControlBox();
 }
 
-
-function onAddLine() {
-    var lines = getLines();
-    if (lines.length === 0) {
-        addNewLine(getCanvasWidth() / 2, 20);
-    } else if (lines.length === 1) {
-        var canvasHeight = getCanvasHeight();
-        addNewLine(getCanvasWidth() / 2, canvasHeight - 70);
-        gYPos = canvasHeight / 2;
-    } else {
-        addNewLine(getCanvasWidth() / 2, gYPos);
-        gYPos += 50;
-    }
-    onSwitchLine();
-    onAlignCenter();
-}
 
 
 function onSetFontFamily(fontName) {
@@ -192,8 +190,8 @@ function onChooseTxt() {
     if (getLines().length === 0) {
         onAddLine();
     }
-    renderCanvas();
-    drawRect();
+    // renderCanvas();
+    // drawRect();
 }
 
 

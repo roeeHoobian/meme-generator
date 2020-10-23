@@ -54,21 +54,26 @@ function drawRect() {
     gCtx.rect(gMeme.lines[gMeme.selectedLineIdx].xPos - measureText(gMeme.lines[gMeme.selectedLineIdx].txt) / 2, gMeme.lines[gMeme.selectedLineIdx].yPos, measureText(gMeme.lines[gMeme.selectedLineIdx].txt), gMeme.lines[gMeme.selectedLineIdx].fontSize);
     gCtx.strokeStyle = 'red';
     gCtx.stroke();
+
+
 }
 
 
 function renderTxt() {
     gMeme.lines.forEach((line) => {
-        drawText(line.txt, line.fontSize, line.xPos, line.yPos, line.align, line.strokeColor, line.fillColor, line.fontFamily);
-    })
+            drawText(line.txt, line.fontSize, line.xPos, line.yPos, line.align, line.strokeColor, line.fillColor, line.fontFamily);
+        })
+        //always render selected line -last
+    var currLine = gMeme.lines[gMeme.selectedLineIdx];
+    if (!currLine) return;
+    drawText(currLine.txt, currLine.fontSize, currLine.xPos, currLine.yPos, currLine.align, currLine.strokeColor, currLine.fillColor, currLine.fontFamily);
 }
 
 
 function drawText(text, fontSize, xPos, yPos, align, strokeColor, fillColor, fontFamily) {
-    var size = fontSize;
     gCtx.lineWidth = '2';
     gCtx.textBaseline = "top";
-    gCtx.font = `${size}px ${fontFamily}`;
+    gCtx.font = `${fontSize}px ${fontFamily}`;
     gCtx.textAlign = align;
     gCtx.strokeStyle = strokeColor;
     gCtx.fillStyle = fillColor;
@@ -200,14 +205,14 @@ function moveTxtDown() {
 function decrearseTxt() {
     if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     gMeme.lines[gMeme.selectedLineIdx].fontSize -= 6;
-    gMeme.lines[gMeme.selectedLineIdx].height -= 6;
+    // gMeme.lines[gMeme.selectedLineIdx].height -= 6;
 }
 
 
 function increaseTxt() {
     if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     gMeme.lines[gMeme.selectedLineIdx].fontSize += 6;
-    gMeme.lines[gMeme.selectedLineIdx].height += 6;
+    // gMeme.lines[gMeme.selectedLineIdx].height += 6;
 }
 
 function getTxt() {
