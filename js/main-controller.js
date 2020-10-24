@@ -45,7 +45,7 @@ function onAddLine() {
         gYPos = getCanvasHeight() / 2;
     } else {
         addNewLine(getCanvasWidth() / 2, gYPos);
-        gYPos += 50;
+        // gYPos += 50;
     }
     onSwitchLine();
     // onAlignCenter();
@@ -258,15 +258,33 @@ function _updateControlBox() {
 function onRenderEmojis() {
     var strHtml = '';
     var emojis = getEmojiz();
+    var startPos = getStartPos();
+    var endPos = getEndPos();
+    for (var i = startPos; i < endPos; i++) {
+        strHtml += `
+        <div onclick="onAddEmojiToCanvas(this.innerText)">${emojis[i]}</div>
+        `
+    }
+    document.querySelector('.emoji-display').innerHTML = strHtml;
+}
 
-    // for (var i = 0; i < 5; i++) {
-    //     strHtml += `
-    //     <h1>${emojis[i]}</h1>
-    //     `
-    // }
-    // console.log(strHtml);
+function onNextEmojis() {
+    var emojis = getEmojiz();
+    if (!emojis) return;
+    setNextPos();
+    onRenderEmojis();
+}
 
-    // document.querySelector('.stickers-section-container').innerHTML = strHtml;
+function onPrevEmojis() {
+    var emojis = getEmojiz();
+    if (!emojis) return;
+    setPrevPos();
+    onRenderEmojis();
+}
 
-    // renderEmojis(getEmojiz());
+function onAddEmojiToCanvas(emoji) {
+    onAddLine();
+    onChangeTxt(emoji);
+    renderCanvas();
+    drawRect();
 }

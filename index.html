@@ -11,10 +11,12 @@
 <body onload="onInit()" onresize="onResizeCanvas()">
     <header class="main-header">
         <div class="header-container container">
-            <h1 class="logo">MemeGen</h1>
+            <a href="index.html">
+                <h1 class="logo">MemeGen</h1>
+            </a>
             <ul class="main-nav">
-                <li class="gallery"><a class="active" href="#" onclick="onHideEditor()">Gallery</a></li>
-                <li class="mems"><a class="" href="#">Saved Mems</a></li>
+                <li class="gallery"><a class="active" href="index.html" onclick="onHideEditor()">Gallery</a></li>
+                <li class="mems"><a class="" href="saved-memes.html">Saved Mems</a></li>
                 <li class="about"><a class="" href="#">About</a></li>
             </ul>
             <button class="mobile-menu-btn" onclick="onShowMenu()">
@@ -84,13 +86,17 @@
             </div>
 
             <div class="section-4-stickers">
-
+                <div class="emoji-section-container">
+                    <button class="btn-next" onclick="onPrevEmojis()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 443.52 443.52"><path d="M143.492 221.863L336.226 29.129c6.663-6.664 6.663-17.468 0-24.132-6.665-6.662-17.468-6.662-24.132 0l-204.8 204.8c-6.662 6.664-6.662 17.468 0 24.132l204.8 204.8c6.78 6.548 17.584 6.36 24.132-.42 6.387-6.614 6.387-17.099 0-23.712L143.492 221.863z"/></svg></button>
+                    <div class="emoji-display"></div>
+                    <button class="btn-prev" onclick="onNextEmojis()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 443.52 443.52"><path d="M336.226 209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132.42-6.388 6.614-6.388 17.099 0 23.712l192.734 192.734-192.734 192.734c-6.663 6.664-6.663 17.468 0 24.132 6.665 6.663 17.468 6.663 24.132 0l204.8-204.8c6.663-6.665 6.663-17.468 0-24.132z"/></svg></button>
+                </div>
             </div>
 
             <div class="section-5-save">
                 <div class="save-section-container">
-                    <button class="share btn-1">Share</button>
-                    <button class="save btn-2"><a href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
+                    <button class="share btn-1-share">Share</button>
+                    <button class="save btn-2-download"><a href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
                     </button>
                 </div>
             </div>

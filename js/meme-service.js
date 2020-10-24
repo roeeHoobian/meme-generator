@@ -157,14 +157,14 @@ function setFontFamily(fontName) {
 
 function getFillColor() {
     if (!gMeme.lines.length) return;
-    if (!gMeme.lines[gMeme.selectedLineIdx].fillColor) return;
+    if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     return gMeme.lines[gMeme.selectedLineIdx].fillColor;
 }
 
 
 function getStrokeColor() {
     if (!gMeme.lines.length) return;
-    if (!gMeme.lines[gMeme.selectedLineIdx].strokeColor) return;
+    if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     return gMeme.lines[gMeme.selectedLineIdx].strokeColor;
 }
 
