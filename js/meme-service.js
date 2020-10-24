@@ -3,6 +3,11 @@
 var gCanvas;
 var gCtx;
 var gNextId = 0;
+var gMemeId = 0;
+var gSavedMemes = [];
+const STORAGE_KEY_MEMES = 'savedMemesDB';
+const STORAGE_KEY_GMEME = 'GmemeDB';
+
 
 var gImgs = [
     { id: 1, url: "img/1.jpg", keywords: [] },
@@ -29,6 +34,7 @@ var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [],
+
 }
 const gSelectedLine = gMeme.lines[gMeme.selectedLineIdx];
 
@@ -36,7 +42,9 @@ function measureText(txt) {
     return gCtx.measureText(txt).width;
 }
 
-
+function gMemeNewId() {
+    return gMemeId++;
+}
 
 function getNewId() {
     return gNextId++;
@@ -62,16 +70,13 @@ function drawRect() {
     gCtx.rect(gMeme.lines[gMeme.selectedLineIdx].xPos - measureText(gMeme.lines[gMeme.selectedLineIdx].txt) / 2, gMeme.lines[gMeme.selectedLineIdx].yPos, measureText(gMeme.lines[gMeme.selectedLineIdx].txt), gMeme.lines[gMeme.selectedLineIdx].fontSize);
     gCtx.strokeStyle = 'red';
     gCtx.stroke();
-
-
 }
 
 
 function renderTxt() {
     gMeme.lines.forEach((line) => {
-            drawText(line.txt, line.fontSize, line.xPos, line.yPos, line.align, line.strokeColor, line.fillColor, line.fontFamily);
-        })
-        //always render selected line -last
+        drawText(line.txt, line.fontSize, line.xPos, line.yPos, line.align, line.strokeColor, line.fillColor, line.fontFamily);
+    });
     var currLine = gMeme.lines[gMeme.selectedLineIdx];
     if (!currLine) return;
     drawText(currLine.txt, currLine.fontSize, currLine.xPos, currLine.yPos, currLine.align, currLine.strokeColor, currLine.fillColor, currLine.fontFamily);
@@ -144,7 +149,7 @@ function deleteLine() {
 }
 
 function getFontName() {
-    if (!gMeme.lines[gMeme.selectedLineIdx].fontFamily) return;
+    if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     return gMeme.lines[gMeme.selectedLineIdx].fontFamily;
 }
 
@@ -275,4 +280,64 @@ function resizeCanvas() {
 function _initTxtSettings() {
     if (!gMeme.lines.length) return;
     gMeme.lines[gMeme.selectedLineIdx].xPos = gCanvas.width / 2;
+}
+
+function initGmeme() {
+    gMeme.lines = [];
+}
+
+///////// save memes //////////
+function saveMeme() {
+    var canvas = getCanvas();
+    const data = canvas.toDataURL();
+    gMeme.imgData = data;
+    gSavedMemes = loadFromStorage(STORAGE_KEY_MEMES);
+    if (!gSavedMemes) gSavedMemes = [];
+    gMeme.id = gSavedMemes.length;
+    var newObj = {...gMeme };
+    gSavedMemes.push(newObj);
+    saveToStorage(STORAGE_KEY_MEMES, gSavedMemes);
+}
+
+function renderSavedMemes() {
+    var memes = loadFromStorage(STORAGE_KEY_MEMES);
+    if (!memes) return;
+    var srtHtml = '';
+    memes.forEach(meme => {
+        srtHtml += `
+        <div class="saved-meme-card">
+        <img src="${meme.imgData}" alt="" class="saved-meme">
+        <div>
+        <a href="index.html"> <button onclick="loadSavedMeme(${meme.id})">Load</button></a>
+        <button onclick="deleteSavedMeme(${meme.id})">Delete</button>
+        </div>
+        </div>
+        `
+    });
+    document.querySelector('.saved-memes').innerHTML = srtHtml;
+}
+
+function deleteSavedMeme(memeId) {
+    gSavedMemes = loadFromStorage(STORAGE_KEY_MEMES);
+    var memeIdx = gSavedMemes.findIndex((meme) => {
+        return meme.id === memeId;
+    })
+    gSavedMemes.splice(memeIdx, 1);
+    saveToStorage(STORAGE_KEY_MEMES, gSavedMemes);
+    renderSavedMemes();
+}
+
+function loadSavedMeme(memeId) {
+    gSavedMemes = loadFromStorage(STORAGE_KEY_MEMES);
+    var memeIdx = gSavedMemes.findIndex((meme) => {
+        return meme.id === memeId;
+    });
+    var selectedMeme = gSavedMemes[memeIdx];
+    console.log(selectedMeme);
+    gMeme = selectedMeme;
+    saveToStorage(STORAGE_KEY_GMEME, gMeme);
+}
+
+function setLoadedMeme(loadedMeme) {
+    gMeme = loadedMeme;
 }

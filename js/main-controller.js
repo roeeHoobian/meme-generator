@@ -7,8 +7,20 @@ function onInit() {
     var elCanvas = document.querySelector('#myCanvas');
     setCanvas(elCanvas);
     renderImageGallery();
-    onRenderEmojis()
-
+    onRenderEmojis();
+    _onLoadSavedMemes();
+    var loadedMeme = loadFromStorage(STORAGE_KEY_GMEME);
+    if (!loadedMeme) {
+        return;
+    } else {
+        setLoadedMeme(loadedMeme);
+        onRenderLoadedMeme(loadedMeme.selectedImgId);
+        setTimeout(() => {
+            renderCanvas();
+            renderTxt();
+        }, 100);
+        localStorage.removeItem(STORAGE_KEY_GMEME);
+    }
 }
 
 
@@ -45,10 +57,8 @@ function onAddLine() {
         gYPos = getCanvasHeight() / 2;
     } else {
         addNewLine(getCanvasWidth() / 2, gYPos);
-        // gYPos += 50;
     }
     onSwitchLine();
-    // onAlignCenter();
 }
 
 function onReleaseLine(ev) {
@@ -176,9 +186,9 @@ function onIncreaseTxt() {
     drawRect();
 }
 
-function onRenderTxt() {
+function onRenderTxt(Txt = getTxt()) {
     renderTxt();
-    var txt = getTxt();
+    var txt = Txt;
     drawText(txt);
 }
 
@@ -202,15 +212,16 @@ function onHideEditor() {
 }
 
 function onChooseImg(imgId) {
+    initGmeme();
     setImg(imgId);
     document.querySelector('.meme-editor').classList.add('show');
     resizeCanvas();
     renderCanvas();
-    scrollTo(0, 0)
+    scrollTo(0, 0);
 }
 
-function onRenderImg() {
-    var imgId = getImgId();
+function onRenderImg(imgID = getImgId()) {
+    var imgId = imgID;
     var elImg = document.querySelector(`.img-${imgId}`);
     renderImg(elImg);
 }
@@ -228,6 +239,7 @@ function renderImageGallery() {
 
 
 function onDownloadCanvas(elLink) {
+    renderCanvas();
     var canvas = getCanvas();
     const data = canvas.toDataURL();
     elLink.href = data;
@@ -254,7 +266,7 @@ function _updateControlBox() {
     document.querySelector('.fonts-menu').value = getFontName();
 }
 
-
+////////// emojis //////////
 function onRenderEmojis() {
     var strHtml = '';
     var emojis = getEmojiz();
@@ -287,4 +299,25 @@ function onAddEmojiToCanvas(emoji) {
     onChangeTxt(emoji);
     renderCanvas();
     drawRect();
+}
+
+////////////save memes ////////////
+function onSaveMeme() {
+    renderCanvas();
+    saveMeme();
+}
+
+function _onLoadSavedMemes() {
+    var savedMemes = loadFromStorage(STORAGE_KEY_MEMES);
+    if (!savedMemes) return [];
+    return savedMemes;
+}
+
+function onRenderLoadedMeme(imgId) {
+    setImg(imgId);
+    document.querySelector('.meme-editor').classList.add('show');
+    document.querySelector('.main-section').classList.add('show');
+    resizeCanvas();
+    renderCanvas();
+    scrollTo(0, 0);
 }

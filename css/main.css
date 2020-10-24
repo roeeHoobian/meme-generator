@@ -105,6 +105,14 @@
     .show {
         display: flex;
     }
+    
+    .main-section {
+        margin: 0 auto;
+        text-align: center;
+        color: #ccc;
+        padding: 10px;
+        font-size: 0.8em;
+    }
     /* box control */
     
     .box-control-container {
@@ -285,8 +293,9 @@
     
     .save-section-container {
         display: grid;
-        grid-template-columns: 30px 100px 50px 100px 30px;
+        grid-template-columns: 5px repeat(3, 1fr) 5px;
         grid-template-rows: repeat(1, minmax(30px, 40px));
+        grid-gap: 5px;
     }
     
     .save-section-container button {
@@ -310,6 +319,11 @@
     
     .btn-2-download a {
         color: #fff;
+    }
+    
+    .btn-3-save {
+        grid-column: 3/4;
+        grid-row: 1/2;
     }
     
     .meme-title {
@@ -401,6 +415,29 @@
         flex-direction: column;
     }
     
+    .saved-memes {
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .saved-memes img {
+        width: 200px;
+        margin: 5px;
+    }
+    
+    .saved-meme-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .saved-meme-card div {
+        display: flex;
+    }
+    
     @media (max-width:980px) {
         .meme-editor {
             flex-direction: column;
@@ -426,9 +463,12 @@
             flex-direction: column;
             display: none;
             position: absolute;
-            top: 57px;
-            right: 0;
-            background-color: white;
+            height: 200px;
+            justify-content: space-around;
+            align-items: center;
+            top: 73px;
+            right: 34px;
+            background-color: gray;
             z-index: 2;
             margin: 0;
         }
@@ -453,5 +493,9 @@
             width: 100%;
             margin: 10px 30px;
             padding: 20px;
+        }
+        .saved-memes img {
+            width: 90%;
+            margin: 10px;
         }
     }

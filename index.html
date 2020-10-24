@@ -96,7 +96,8 @@
             <div class="section-5-save">
                 <div class="save-section-container">
                     <button class="share btn-1-share">Share</button>
-                    <button class="save btn-2-download"><a href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
+                    <button class=" btn-2-download"><a href="#" onclick="onDownloadCanvas(this)" download="">Download</a>
+                        <button class="btn-3-save" onclick="onSaveMeme()">save</button>
                     </button>
                 </div>
             </div>
@@ -104,9 +105,14 @@
         </div>
 
     </div>
+    <div class="main-section">
+        <div class="image-gallery container">
+        </div>
+    </div>
 
-    <div class="image-gallery container"></div>
 
+
+    <script src="js/storage-service.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/emoji-service.js"></script>
     <script src="js/main-controller.js"></script>
