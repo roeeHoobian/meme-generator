@@ -96,6 +96,10 @@ function onSelectLine(ev) {
     gIsLineMoved = false;
 }
 
+function isMouseOver(ev, line) {
+
+}
+
 
 function onDeleteLine() {
     deleteLine();
@@ -216,7 +220,6 @@ function onRenderImg() {
     elImg.onload = () => {
         renderImg(elImg);
         onRenderTxt();
-
     }
     resizeCanvas();
     renderImg(elImg);

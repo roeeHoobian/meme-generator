@@ -124,6 +124,7 @@ function addNewLine(x, y) {
 }
 
 function moveLine(x, y) {
+    // if (!gMeme.lines[gMeme.selectedLineIdx]) return;
     gMeme.lines[gMeme.selectedLineIdx].xPos = x;
     gMeme.lines[gMeme.selectedLineIdx].yPos = y - (gMeme.lines[gMeme.selectedLineIdx].fontSize / 2);
 }
