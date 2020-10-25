@@ -50,7 +50,6 @@ function onAddLine() {
         addNewLine(getCanvasWidth() / 2, gYPos);
         switchToLine(lines.length - 1);
     }
-    // onSwitchLine();
     renderCanvas();
     drawRect();
     updateControlBox();
@@ -216,6 +215,8 @@ function onRenderImg() {
     var elImg = document.querySelector(`.img-${imgId}`);
     elImg.onload = () => {
         renderImg(elImg);
+        onRenderTxt();
+
     }
     resizeCanvas();
     renderImg(elImg);
@@ -319,6 +320,7 @@ function loadSavedMemes() {
         renderLoadedMeme(loadedGmeme.selectedImgId);
         renderCanvas();
         removeGmemeStorage();
+        // onRenderTxt();
     }
 }
 

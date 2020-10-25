@@ -290,13 +290,6 @@ function resizeCanvas() {
     if (elContainer.offsetWidth >= 520 || !elContainer.offsetWidth) return;
     elCanvas.width = elContainer.offsetWidth;
     elCanvas.height = elContainer.offsetWidth;
-    _initTxtSettings();
-}
-
-
-function _initTxtSettings() {
-    if (!gMeme.lines.length) return;
-    gMeme.lines[gMeme.selectedLineIdx].xPos = gCanvas.width / 2;
 }
 
 
