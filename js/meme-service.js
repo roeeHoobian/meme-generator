@@ -12,7 +12,7 @@ var gImgs = [
     { id: 1, url: "img/1.jpg", keywords: ['trump', 'politics', 'america', 'serious'] },
     { id: 2, url: "img/2.jpg", keywords: ['dogs', 'animals', 'cute', 'pets'] },
     { id: 3, url: "img/3.jpg", keywords: ['dogs', 'animals', 'cute', 'pets', 'baby', 'sleep'] },
-    { id: 4, url: "img/4.jpg", keywords: ['animals', 'pets', 'cats', 'tierd'] },
+    { id: 4, url: "img/4.jpg", keywords: ['animals', 'pets', 'cats', 'cute', 'tierd'] },
     { id: 5, url: "img/5.jpg", keywords: ['winner', 'funny', 'kids'] },
     { id: 6, url: "img/6.jpg", keywords: ['explain'] },
     { id: 7, url: "img/7.jpg", keywords: ['surprised', 'funny', 'kids'] },
