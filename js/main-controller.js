@@ -254,7 +254,7 @@ function onResizeCanvas() {
 
 
 function onShowMenu() {
-    document.querySelector('.main-nav').classList.toggle('show');
+    document.querySelector('.main-nav').classList.toggle('show-menu');
 }
 
 
@@ -310,6 +310,18 @@ function onAddEmojiToCanvas(emoji) {
 function onSaveMeme() {
     renderCanvas();
     saveMeme();
+    document.querySelector('.btn-3-save').classList.add('shaky');
+    document.querySelector('.mems').classList.add('rotate');
+    var rotate = setTimeout(() => {
+        document.querySelector('.mems').classList.remove('rotate');
+
+    }, 100);
+    var shake = setTimeout(() => {
+
+        document.querySelector('.btn-3-save').classList.remove('shaky');
+
+    }, 800);
+
 }
 
 

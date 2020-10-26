@@ -55,8 +55,23 @@
         align-items: center;
     }
     
+    .mems {
+        transform: rotate(0deg);
+        transition: transform .3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
     .logo {
         margin-left: 20px;
+    }
+    
+    .shaky {
+        animation-name: shakeY;
+        animation-duration: .8s;
+    }
+    
+    .rotate {
+        transform: rotate(-10deg);
+        transition: transform .2s ease-in-out;
     }
     
     .mobile-menu-btn {
@@ -323,7 +338,7 @@
         display: grid;
         grid-template-columns: 5px repeat(3, 1fr) 5px;
         grid-template-rows: repeat(1, minmax(30px, 40px));
-        grid-gap: 5px;
+        grid-gap: 2px;
     }
     
     .save-section-container button {
@@ -379,7 +394,7 @@
     
     .emoji-section-container {
         display: grid;
-        grid-template-columns: 20px repeat(5, 50px) 20px;
+        grid-template-columns: 20px repeat(5, 48px) 20px;
         grid-template-rows: repeat(2, 50px);
         grid-gap: 5px;
         box-shadow: 0px 4px 8px #2b2b2b;
@@ -523,6 +538,24 @@
         display: flex;
     }
     
+    @keyframes shakeY {
+        0% {
+            transform: translateY(0);
+            ;
+        }
+        25% {
+            transform: translateY(10px);
+            ;
+        }
+        50% {
+            transform: translateY(5);
+        }
+        100% {
+            transform: translateY(0);
+            ;
+        }
+    }
+    
     @media (max-width:980px) {
         .meme-editor {
             flex-direction: column;
@@ -562,22 +595,27 @@
             max-width: 550px;
         }
         .main-nav {
+            /* display: none; */
+            transition: transform 1s;
             background: rgb(51, 190, 109);
             background: linear-gradient(180deg, rgba(51, 190, 109, 1) 0%, rgba(12, 152, 185, 1) 100%);
             flex-direction: column;
-            display: none;
-            position: absolute;
+            /* display: none; */
+            position: fixed;
             height: 200px;
             justify-content: space-around;
             align-items: center;
-            top: 73px;
-            right: 34px;
+            top: 70px;
+            right: 0px;
             background-color: gray;
             z-index: 2;
-            margin: 0;
+            transform: translateX(120%);
         }
-        .show {
-            display: flex;
+        .show-menu {
+            transition: transform .8;
+            transform: translateX(0);
+            height: 200px;
+            /* display: flex; */
         }
         .logo {
             margin: 10px 10px;
