@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body onload="onInit()" onresize="onResizeCanvas()">
+<body onload="onInit()">
 
     <header class="main-header">
         <div class="header-container container">
@@ -32,7 +32,7 @@
         </div>
     </header>
 
-    <div class="meme-editor container">
+    <div class="meme-editor container" onresize="onResizeCanvas()">
 
         <div class="canvas-container">
             <canvas id="myCanvas" width="500" height="500" onmousedown="onSelectLine(event)" onmousemove="onDragLine(event)" onmouseup="onReleaseLine(event)">
@@ -183,8 +183,8 @@
 
 
     <script src="js/storage-service.js"></script>
-    <script src="js/meme-service.js"></script>
     <script src="js/emoji-service.js"></script>
+    <script src="js/meme-service.js"></script>
     <script src="js/main-controller.js"></script>
 </body>
 
